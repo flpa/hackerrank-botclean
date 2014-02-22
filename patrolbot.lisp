@@ -2,6 +2,7 @@
 ; This guarantees he'll find all the dirt, but he's very inefficient
 
 (defconstant +field-size+ 5)
+(defconstant +dirty-cell+ #\d)
 
 (defun read-field () 
   "Reads the field into a list of strings."
@@ -12,7 +13,7 @@
 
 (defun next-instr (x y field)
   "Determines the next instruction."
-  (if (eql #\d (elt (elt field y) x))
+  (if (eql +dirty-cell+ (elt (elt field y) x))
       "CLEAN"
       (if (evenp y)
 	 (if (eql x (- +field-size+ 1))
