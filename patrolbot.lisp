@@ -11,15 +11,24 @@
       (setf field (append field (list (read-line)))))
     field))
 
+(defun standing-on-dirt (x y field)
+  (eql +dirty-cell+ (elt (elt field y) x)))
+
+(defun on-right-edge (x)
+  (eql x (- +field-size+ 1)))
+
+(defun on-left-edge (x)
+  (eql x 0))
+
 (defun next-instr (x y field)
   "Determines the next instruction."
-  (if (eql +dirty-cell+ (elt (elt field y) x))
+  (if (standing-on-dirt x y field)
       "CLEAN"
       (if (evenp y)
-	 (if (eql x (- +field-size+ 1))
+	 (if (on-right-edge x)
 	     "DOWN"
 	     "RIGHT")
-	 (if (eql x 0)
+	 (if (on-left-edge x)
 	     "DOWN"
 	     "LEFT"))))
 
