@@ -6,10 +6,7 @@
 
 (defun read-field () 
   "Reads the field into a list of strings."
-  (let ((field nil))
-    (dotimes (i +field-size+)
-      (setf field (append field (list (read-line)))))
-    field))
+  (loop repeat +field-size+ collecting (read-line)))
 
 (defun standing-on-dirt (x y field)
   (eql +dirty-cell+ (elt (elt field y) x)))
