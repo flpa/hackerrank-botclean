@@ -30,10 +30,18 @@
   (if (standing-on-dirt x y field)
       "CLEAN"
       (progn
-	(unless *instructions* (build-instructions))
+	(unless *instructions* (build-instructions x y field))
 	(pop-instruction))))
 
-(defun build-instructions ()
+(defun build-instructions (x y field)
+  (loop for option in (permutate (find-dirt-locations field))
+     do (setf option (append `((,x ,y)) option)) ; path from robot
+     when (or
+	   (not *instructions*) ; not set
+	   (< (path-length option) (path-length *instructions*))) ; shorter
+     do (setf *instructions*  option)))
+
+(defun path-length (coordinates)
   )
 
 (defun find-dirt-locations (field)
