@@ -36,6 +36,9 @@
 	     "DOWN"
 	     "LEFT"))))
 
+; ----------------
+; Actual execution
+; ----------------
 (let ((y (read)) (x (read)) (field (read-field)))
   (format t "~a" (next-instr x y field)))
 
