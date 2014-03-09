@@ -29,13 +29,12 @@
   "Determines the next instruction."
   (if (standing-on-dirt x y field)
       "CLEAN"
-      (if (evenp y)
-	 (if (on-right-edge x)
-	     "DOWN"
-	     "RIGHT")
-	 (if (on-left-edge x)
-	     "DOWN"
-	     "LEFT"))))
+      (progn
+	(unless *instructions* (build-instructions))
+	(pop-instruction))))
+
+(defun build-instructions ()
+  )
 
 (defun pop-instruction()
   (let ((instr (first *instructions*)))
