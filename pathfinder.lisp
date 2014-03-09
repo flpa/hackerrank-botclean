@@ -13,3 +13,29 @@
   (mapcan #'(lambda (x)
     (mapcar #'(lambda (y) (cons x y))
       (permutate (remove x list :count 1)))) list)))
+
+(defconstant +field-size+ 5)
+(defconstant +dirty-cell+ #\d)
+
+(defun read-field () 
+  "Reads the field into a list of strings."
+  (loop repeat +field-size+ collecting (read-line)))
+
+(defun standing-on-dirt (x y field)
+  (eql +dirty-cell+ (elt (elt field y) x)))
+
+(defun next-instr (x y field)
+  "Determines the next instruction."
+  (if (standing-on-dirt x y field)
+      "CLEAN"
+      (if (evenp y)
+	 (if (on-right-edge x)
+	     "DOWN"
+	     "RIGHT")
+	 (if (on-left-edge x)
+	     "DOWN"
+	     "LEFT"))))
+
+(let ((y (read)) (x (read)) (field (read-field)))
+  (format t "~a" (next-instr x y field)))
+
