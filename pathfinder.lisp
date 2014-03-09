@@ -16,6 +16,7 @@
 
 (defconstant +field-size+ 5)
 (defconstant +dirty-cell+ #\d)
+(defparameter *instructions* nil)
 
 (defun read-field () 
   "Reads the field into a list of strings."
@@ -36,6 +37,11 @@
 	     "DOWN"
 	     "LEFT"))))
 
+(defun pop-instruction()
+  (let ((instr (first *instructions*)))
+    (setf *instructions* (rest *instructions*))
+    instr))
+    
 ; ----------------
 ; Actual execution
 ; ----------------
