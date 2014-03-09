@@ -41,6 +41,8 @@
 	   (< (path-length option) (path-length *instructions*))) ; shorter
      do (setf *instructions*  option)))
 
+; TODO actually this is wrong, path length is instruction count, we need a
+; function for creating instructions for coordinates
 (defun path-length (coordinates)
   )
 
