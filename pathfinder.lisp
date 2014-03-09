@@ -37,9 +37,11 @@
   )
 
 (defun find-dirt-locations (field)
+  "Returns a list of all dirt coordinates in field. Coordinates are
+   represented by two-element lists in format (x y), e.g. (0 1)"
   (loop for i from 0 below (* +field-size+ +field-size+)
-     and x = (mod i +field-size+)
-     and y = (floor i +field-size+)
+     for x = (mod i +field-size+)
+     for y = (floor i +field-size+)
      if (standing-on-dirt x y field) collect (list x y)))
 
 (defun pop-instruction()
