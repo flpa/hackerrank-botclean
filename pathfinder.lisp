@@ -36,6 +36,15 @@
 (defun build-instructions ()
   )
 
+(defun find-dirt-locations (field)
+  (loop repeat (* +field-size+ +field-size+)
+     for x = 0 then
+       (if (eql (- +field-size+ 1) x)
+	   0
+	   (+ 1 x)) 
+     and y = 0 then (floor x +field-size+)
+     if (standing-on-dirt x y field) collect (list x y)))
+
 (defun pop-instruction()
   (let ((instr (first *instructions*)))
     (setf *instructions* (rest *instructions*))
